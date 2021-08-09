@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Linq;
+using System.Windows;
 
 namespace CRM_Shop
 {
@@ -7,6 +9,7 @@ namespace CRM_Shop
     /// </summary>
     public partial class LoginWindow : Window
     {
+        CRMUser User;
         public LoginWindow()
         {
             InitializeComponent();
@@ -15,12 +18,28 @@ namespace CRM_Shop
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             CRMContext context = new CRMContext();
+            int? userId = context.ValidateUser(Login_TB.Text, Password_PB.Password).FirstOrDefault();
 
-            var user = context.GetUserData(Login_TB.Text, Password_PB.Password);
-
-            foreach (var u in user)
+            switch (userId.Value)
             {
-                CRMUser User = new CRMUser(u.Login, u.RoleName, u.EmployeeName);
+                case -1:
+                    MessageBox.Show("Неправильный логин или пароль", "Ошибка");
+                    break;
+                default:
+                    var userdata = context.GetUserData(userId);
+                    EnterSystem(userdata);
+                    break;
+            }
+        }
+
+        private void EnterSystem(System.Data.Entity.Core.Objects.ObjectResult<UserData> userdata)
+        {
+            foreach (var u in userdata)
+            {
+                User = new CRMUser(u.Login, u.RoleName, u.EmployeeName);
+                MainWindow mainWindow = new MainWindow(User, this);
+                mainWindow.Show();
+                Hide();
             }
         }
     }

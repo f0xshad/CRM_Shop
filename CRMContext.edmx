@@ -76,8 +76,11 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="GetUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Login" Type="nvarchar(max)" Mode="In" />
-          <Parameter Name="Password" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ValidateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Login" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="Хранилище CRM_ShopModelContainer">
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
@@ -195,6 +198,9 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <FunctionImport Name="GetUserData" ReturnType="Collection(CRM_ShopModel.UserData)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ValidateUser" ReturnType="Collection(Int32)">
             <Parameter Name="Login" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
@@ -259,6 +265,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="Хранилище CRM_ShopModel.ValidateUser" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

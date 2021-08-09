@@ -19,9 +19,15 @@ namespace CRM_Shop
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        CRMUser CRMUser;
+        LoginWindow LoginWindow;
+        public MainWindow(CRMUser user, LoginWindow loginWindow)
         {
             InitializeComponent();
+
+            CRMUser = user;
+            LoginWindow = loginWindow;
+            EmployeeName_L.Text = CRMUser.GetEmployeeName();
         }
     }
 }

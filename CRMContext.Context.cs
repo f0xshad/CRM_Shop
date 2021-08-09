@@ -32,7 +32,16 @@ namespace CRM_Shop
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<User> Users { get; set; }
     
-        public virtual ObjectResult<UserData> GetUserData(string login, string password)
+        public virtual ObjectResult<UserData> GetUserData(Nullable<int> userId)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserData>("GetUserData", userIdParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> ValidateUser(string login, string password)
         {
             var loginParameter = login != null ?
                 new ObjectParameter("Login", login) :
@@ -42,7 +51,7 @@ namespace CRM_Shop
                 new ObjectParameter("Password", password) :
                 new ObjectParameter("Password", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UserData>("GetUserData", loginParameter, passwordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ValidateUser", loginParameter, passwordParameter);
         }
     }
 }
