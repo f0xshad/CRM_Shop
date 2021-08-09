@@ -1,0 +1,46 @@
+﻿<Window x:Class="CRM_Shop.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CRM_Shop"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="#E3E4E6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel LastChildFill="True" Grid.Row="0" >
+            <Menu
+                Foreground="#0C0C0C"
+                BorderBrush="#8FA6CC"
+                Background="#B4E4FD" FontFamily="Avenir">
+                <MenuItem FlowDirection="LeftToRight" Header="Таблицы" Height="25">
+                    <MenuItem x:Name="UserMI" Header="Учетные записи"/>
+                </MenuItem>
+                <MenuItem Header="Отчеты" Height="25">
+                    <MenuItem Header="Сотрудники"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <DockPanel LastChildFill="False" Grid.Row="1">
+            <TextBox 
+                x:Name="EmployeeName_L"
+                DockPanel.Dock="Right"
+                Width="90"
+                Margin="5"
+                Height="20"
+                FontSize="12"
+                Style="{DynamicResource LabelStyle}"
+                     />
+        </DockPanel>
+        <!-- /////////////////////////// -->
+        <DockPanel LastChildFill="True" Grid.Row="3" Margin="10" >
+            <DataGrid x:Name="MainDataGrid" HeadersVisibility="Column" SelectionMode="Single" FontFamily="Avenir"
+                />
+        </DockPanel>
+    </Grid>
+</Window>
