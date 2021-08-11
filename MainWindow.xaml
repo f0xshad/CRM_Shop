@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CRM_Shop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="employeeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Employee}, CreateList=True}"/>
+        <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type local:User}, CreateList=True}"/>
+    </Window.Resources>
     <Grid Background="#E3E4E6">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
@@ -19,7 +23,8 @@
                 BorderBrush="#8FA6CC"
                 Background="#B4E4FD" FontFamily="Avenir">
                 <MenuItem FlowDirection="LeftToRight" Header="Таблицы" Height="25">
-                    <MenuItem x:Name="UserMI" Header="Учетные записи"/>
+                    <MenuItem x:Name="UserMI" Header="Учетные записи" Click="UserMI_Click"/>
+                    <MenuItem x:Name="EmployeeMI" Header="Сотрудники" Click="EmployeeMI_Click"/>
                 </MenuItem>
                 <MenuItem Header="Отчеты" Height="25">
                     <MenuItem Header="Сотрудники"/>
@@ -38,9 +43,9 @@
                      />
         </DockPanel>
         <!-- /////////////////////////// -->
-        <DockPanel LastChildFill="True" Grid.Row="3" Margin="10" >
-            <DataGrid x:Name="MainDataGrid" HeadersVisibility="Column" SelectionMode="Single" FontFamily="Avenir"
-                />
+        <DockPanel x:Name="DGDockPanel" DataContext="" LastChildFill="True" Grid.Row="3" Margin="10">
+            <DataGrid x:Name="MainDataGrid" HeadersVisibility="Column" SelectionMode="Single" AutoGenerateColumns="False" FontFamily="Avenir" ItemsSource="{Binding }">
+            </DataGrid>
         </DockPanel>
     </Grid>
 </Window>

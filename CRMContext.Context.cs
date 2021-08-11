@@ -14,7 +14,9 @@ namespace CRM_Shop
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+
     public partial class CRMContext : DbContext
     {
         public CRMContext()

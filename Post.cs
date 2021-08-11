@@ -10,20 +10,20 @@
 namespace CRM_Shop
 {
     using System;
-    using System.Collections.Generic;
-    
+    using System.Collections.ObjectModel;
+
     public partial class Post
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Post()
         {
-            this.Employees = new HashSet<Employee>();
+            this.Employees = new ObservableCollection<Employee>();
         }
     
         public int PostId { get; set; }
         public string PostName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ObservableCollection<Employee> Employees { get; set; }
     }
 }
