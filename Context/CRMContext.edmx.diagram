@@ -5,16 +5,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="b658d5b52a0447d08ffb8a9ec5a283ea" Name="Diagram1">
-        <EntityTypeShape EntityType="CRM_ShopModel.Employee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRM_ShopModel.Employee" Width="1.5" PointX="3.375" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="CRM_ShopModel.Post" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CRM_ShopModel.UserRole" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CRM_ShopModel.User" Width="1.5" PointX="5.5" PointY="1" IsExpanded="true" />
-        <AssociationConnector Association="CRM_ShopModel.FK_dbo_Employees_dbo_Posts_PostId" ManuallyRouted="true" >
-          <ConnectorPoint PointX="2.25" PointY="2.1086260907061689" />
-          <ConnectorPoint PointX="2.4975" PointY="2.16499879301264" />
-          <ConnectorPoint PointX="2.7525" PointY="2.16499879301264" />
-          <ConnectorPoint PointX="2.7525" PointY="2.3764949599497083" />
-          <ConnectorPoint PointX="3" PointY="2.3764949599497083" />
+        <AssociationConnector Association="CRM_ShopModel.FK_dbo_Employees_dbo_Posts_PostId" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="CRM_ShopModel.FK_dbo_Users_dbo_UserRoles_RoleId" ManuallyRouted="false" />
         <AssociationConnector Association="CRM_ShopModel.FK_Users_Employees" />

@@ -7,16 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CRM_Shop
+namespace CRM_Shop.Context
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-
+    
     public partial class CRMContext : DbContext
     {
         public CRMContext()

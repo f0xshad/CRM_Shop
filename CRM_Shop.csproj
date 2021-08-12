@@ -64,28 +64,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CRMContext.cs">
+    <Compile Include="Context\CRMContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="CRMUser.cs" />
-    <Compile Include="Employee.cs">
+    <Compile Include="ViewController.cs" />
+    <Compile Include="Login\CRMUser.cs" />
+    <Compile Include="Context\Employee.cs">
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Post.cs">
+    <Compile Include="Context\Post.cs">
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="User.cs">
+    <Compile Include="Context\User.cs">
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserData.cs">
+    <Compile Include="Context\UserData.cs">
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="UserRole.cs">
+    <Compile Include="Context\UserRole.cs">
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
-    <Page Include="LoginWindow.xaml">
+    <Page Include="Login\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -97,17 +98,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CRMContext.Context.cs">
+    <Compile Include="Context\CRMContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CRMContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CRMContext.Designer.cs">
+    <Compile Include="Context\CRMContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CRMContext.edmx</DependentUpon>
     </Compile>
-    <Compile Include="LoginWindow.xaml.cs">
+    <Compile Include="Login\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
@@ -133,11 +134,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="CRMContext.edmx">
+    <EntityDeploy Include="Context\CRMContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CRMContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="CRMContext.edmx.diagram">
+    <None Include="Context\CRMContext.edmx.diagram">
       <DependentUpon>CRMContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -155,12 +156,12 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CRMContext.Context.tt">
+    <Content Include="Context\CRMContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CRMContext.edmx</DependentUpon>
       <LastGenOutput>CRMContext.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="CRMContext.tt">
+    <Content Include="Context\CRMContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CRMContext.edmx</DependentUpon>
       <LastGenOutput>CRMContext.cs</LastGenOutput>

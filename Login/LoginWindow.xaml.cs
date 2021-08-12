@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CRM_Shop.Context;
+using System;
 using System.Linq;
 using System.Windows;
 
@@ -37,10 +38,10 @@ namespace CRM_Shop
             foreach (var u in userdata)
             {
                 User = new CRMUser(u.Login, u.RoleName, u.EmployeeName);
-                MainWindow mainWindow = new MainWindow(User, this);
-                mainWindow.Show();
-                Hide();
             }
+            MainWindow mainWindow = new MainWindow(User, this);
+            mainWindow.Show();
+            Hide();
         }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CRM_Shop
+namespace CRM_Shop.Context
 {
     using System;
     

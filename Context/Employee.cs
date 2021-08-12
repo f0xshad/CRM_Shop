@@ -7,18 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CRM_Shop
+namespace CRM_Shop.Context
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-
+    
     public partial class Employee
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
-            this.Users = new ObservableCollection<User>();
+            this.Users = new HashSet<User>();
         }
     
         public int EmployeeId { get; set; }
@@ -29,6 +28,6 @@ namespace CRM_Shop
     
         public virtual Post Post { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<User> Users { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

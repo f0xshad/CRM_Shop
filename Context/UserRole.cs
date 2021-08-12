@@ -7,23 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CRM_Shop
+namespace CRM_Shop.Context
 {
     using System;
-    using System.Collections.ObjectModel;
-
-    public partial class Post
+    using System.Collections.Generic;
+    
+    public partial class UserRole
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Post()
+        public UserRole()
         {
-            this.Employees = new ObservableCollection<Employee>();
+            this.Users = new HashSet<User>();
         }
     
-        public int PostId { get; set; }
-        public string PostName { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ObservableCollection<Employee> Employees { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }
