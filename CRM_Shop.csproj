@@ -41,6 +41,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -69,8 +70,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewController.cs" />
-    <Compile Include="Login\CRMUser.cs" />
     <Compile Include="Context\Employee.cs">
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
@@ -86,6 +85,19 @@
     <Compile Include="Context\UserRole.cs">
       <DependentUpon>CRMContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseTransaction\DatabaseTable.cs" />
+    <Compile Include="DatabaseTransaction\Forms\UserForm.xaml.cs">
+      <DependentUpon>UserForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseTransaction\IDeletable.cs" />
+    <Compile Include="DatabaseTransaction\IInsertable.cs" />
+    <Compile Include="DatabaseTransaction\IUpdate.cs" />
+    <Compile Include="ViewController.cs" />
+    <Compile Include="Login\CRMUser.cs" />
+    <Page Include="DatabaseTransaction\Forms\UserForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Login\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -142,8 +154,8 @@
       <DependentUpon>CRMContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\Employee.datasource" />
-    <None Include="Properties\DataSources\User.datasource" />
+    <None Include="Properties\DataSources\CRM_Shop.Context.Employee.datasource" />
+    <None Include="Properties\DataSources\CRM_Shop.Context.User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

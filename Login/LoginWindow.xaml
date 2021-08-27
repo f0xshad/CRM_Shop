@@ -26,12 +26,16 @@
         <DockPanel LastChildFill="True" Grid.Row="1" Margin="5">
             <TextBox
                 Text="Логин"
+                Width="120"
+                Height="30"
                 DockPanel.Dock="Left"
                 Style="{DynamicResource LabelStyle}"
                 />
             <TextBox
                 x:Name="Login_TB"
                 DockPanel.Dock="Left"
+                Width="250"
+                Height="30"
                 Margin="10,0,0,0"
                 Style="{DynamicResource InputStyle}"
                 />
@@ -39,11 +43,15 @@
         <DockPanel LastChildFill="True" Grid.Row="2" Margin="5">
             <TextBox
                 Text="Пароль"
+                Width="120"
+                Height="30"
                 DockPanel.Dock="Left"
                 Style="{DynamicResource LabelStyle}"
                 />
             <PasswordBox
                 x:Name="Password_PB"
+                Width="250"
+                Height="30"
                 Margin="10,0,0,0"
                 DockPanel.Dock="Left" Style="{DynamicResource InputPasswordStyle}" 
                 />

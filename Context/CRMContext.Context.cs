@@ -53,5 +53,23 @@ namespace CRM_Shop.Context
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("ValidateUser", loginParameter, passwordParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> GetEmployeeId(string fullName)
+        {
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("FullName", fullName) :
+                new ObjectParameter("FullName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetEmployeeId", fullNameParameter);
+        }
+    
+        public virtual ObjectResult<string> GetEmployeeName(Nullable<int> employeeId)
+        {
+            var employeeIdParameter = employeeId.HasValue ?
+                new ObjectParameter("EmployeeId", employeeId) :
+                new ObjectParameter("EmployeeId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("GetEmployeeName", employeeIdParameter);
+        }
     }
 }

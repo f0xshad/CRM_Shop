@@ -10,37 +10,37 @@
             <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="MiddleName" Type="nvarchar(max)" />
-          <Property Name="PostId" Type="int" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="Posts">
           <Key>
             <PropertyRef Name="PostId" />
           </Key>
           <Property Name="PostId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PostName" Type="nvarchar(max)" />
+          <Property Name="PostName" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="UserRoles">
           <Key>
             <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleName" Type="nvarchar(max)" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Login" Type="nvarchar(max)" />
-          <Property Name="Password" Type="nvarchar(max)" />
-          <Property Name="RoleId" Type="int" />
-          <Property Name="EmployeeId" Type="int" />
+          <Property Name="Login" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_dbo_Employees_dbo_Posts_PostId">
-          <End Role="Posts" Type="Self.Posts" Multiplicity="0..1" />
+          <End Role="Posts" Type="Self.Posts" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Posts">
@@ -52,7 +52,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_Users_dbo_UserRoles_RoleId">
-          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="0..1" />
+          <End Role="UserRoles" Type="Self.UserRoles" Multiplicity="1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserRoles">
@@ -63,18 +63,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Users_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+        <Association Name="FK_Employees_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="EmployeeId" />
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="EmployeeId" />
+            <Dependent Role="Employees">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetEmployeeId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="GetEmployeeName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetUserData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="int" Mode="In" />
         </Function>
@@ -95,9 +101,9 @@
             <End Role="UserRoles" EntitySet="UserRoles" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_Users_Employees" Association="Self.FK_Users_Employees">
-            <End Role="Employees" EntitySet="Employees" />
+          <AssociationSet Name="FK_Employees_Users" Association="Self.FK_Employees_Users">
             <End Role="Users" EntitySet="Users" />
+            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -109,19 +115,20 @@
             <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="MiddleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PostId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Post" Relationship="Self.FK_dbo_Employees_dbo_Posts_PostId" FromRole="Employees" ToRole="Posts" />
-          <NavigationProperty Name="Users" Relationship="CRM_ShopModel.FK_Users_Employees" FromRole="Employee" ToRole="User" />
-        </EntityType>
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="CRM_ShopModel.FK_Employees_Users" FromRole="Employee" ToRole="User" />
+          </EntityType>
         <EntityType Name="Post">
           <Key>
             <PropertyRef Name="PostId" />
           </Key>
           <Property Name="PostId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PostName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="Self.FK_dbo_Employees_dbo_Posts_PostId" FromRole="Posts" ToRole="Employees" />
         </EntityType>
         <EntityType Name="UserRole">
@@ -129,7 +136,7 @@
             <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Users" Relationship="Self.FK_dbo_Users_dbo_UserRoles_RoleId" FromRole="UserRoles" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
@@ -137,13 +144,12 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Login" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
-          <Property Name="EmployeeId" Type="Int32" Nullable="true" />
           <NavigationProperty Name="UserRole" Relationship="Self.FK_dbo_Users_dbo_UserRoles_RoleId" FromRole="Users" ToRole="UserRoles" />
-          <NavigationProperty Name="Employee" Relationship="CRM_ShopModel.FK_Users_Employees" FromRole="User" ToRole="Employee" />
-        </EntityType>
+          <NavigationProperty Name="Employees" Relationship="CRM_ShopModel.FK_Employees_Users" FromRole="User" ToRole="Employee" />
+          </EntityType>
         <Association Name="FK_dbo_Employees_dbo_Posts_PostId">
           <End Role="Posts" Type="Self.Post" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employee" Multiplicity="*" />
@@ -188,9 +194,15 @@
             <Parameter Name="Login" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
-          <AssociationSet Name="FK_Users_Employees" Association="CRM_ShopModel.FK_Users_Employees">
-            <End Role="Employee" EntitySet="Employees" />
-            <End Role="User" EntitySet="Users" />
+          <FunctionImport Name="GetEmployeeId" ReturnType="Collection(Int32)">
+          <Parameter Name="FullName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeeName" ReturnType="Collection(String)">
+          <Parameter Name="EmployeeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <AssociationSet Name="FK_Employees_Users" Association="CRM_ShopModel.FK_Employees_Users">
+            <End EntitySet="Users" Role="User" />
+            <End EntitySet="Employees" Role="Employee" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="UserData">
@@ -199,15 +211,15 @@
           <Property Type="String" Name="RoleName" Nullable="true" />
           <Property Type="String" Name="EmployeeName" Nullable="true" />
         </ComplexType>
-        <Association Name="FK_Users_Employees">
-          <End Type="CRM_ShopModel.Employee" Role="Employee" Multiplicity="0..1" />
-          <End Type="CRM_ShopModel.User" Role="User" Multiplicity="*" />
+        <Association Name="FK_Employees_Users">
+          <End Type="CRM_ShopModel.User" Multiplicity="0..1" Role="User" />
+          <End Type="CRM_ShopModel.Employee" Multiplicity="*" Role="Employee" />
           <ReferentialConstraint>
-            <Principal Role="Employee">
-              <PropertyRef Name="EmployeeId" />
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="EmployeeId" />
+            <Dependent Role="Employee">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -220,6 +232,7 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="CRM_ShopModel.Employee">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -251,7 +264,6 @@
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -266,6 +278,8 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="ValidateUser" FunctionName="Хранилище CRM_ShopModel.ValidateUser" />
+          <FunctionImportMapping FunctionImportName="GetEmployeeId" FunctionName="Хранилище CRM_ShopModel.GetEmployeeId" />
+          <FunctionImportMapping FunctionImportName="GetEmployeeName" FunctionName="Хранилище CRM_ShopModel.GetEmployeeName" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

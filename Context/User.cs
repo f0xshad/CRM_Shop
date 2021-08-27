@@ -10,17 +10,23 @@
 namespace CRM_Shop.Context
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Employees = new ObservableCollection<Employee>();
+        }
+    
         public int UserId { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
         public int RoleId { get; set; }
-        public Nullable<int> EmployeeId { get; set; }
     
         public virtual UserRole UserRole { get; set; }
-        public virtual Employee Employee { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ObservableCollection<Employee> Employees { get; set; }
     }
 }

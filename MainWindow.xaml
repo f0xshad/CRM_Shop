@@ -3,18 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CRM_Shop"
+        xmlns:context="clr-namespace:CRM_Shop.Context"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Loaded="Window_Loaded">
     <Window.Resources>
-        <CollectionViewSource x:Key="employeeViewSource" d:DesignSource="{d:DesignInstance {x:Type local:Employee}, CreateList=True}"/>
-        <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type local:User}, CreateList=True}"/>
+        <CollectionViewSource x:Key="employeeViewSource" d:DesignSource="{d:DesignInstance {x:Type context:Employee}, CreateList=True}"/>
+        <CollectionViewSource x:Key="userViewSource" d:DesignSource="{d:DesignInstance {x:Type context:User}, CreateList=True}"/>
     </Window.Resources>
     <Grid Background="#E3E4E6">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="30"/>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel LastChildFill="True" Grid.Row="0" >
@@ -42,9 +42,40 @@
                 Style="{DynamicResource LabelStyle}"
                      />
         </DockPanel>
-        <!-- /////////////////////////// -->
-        <DockPanel x:Name="DGDockPanel" DataContext="" LastChildFill="True" Grid.Row="3" Margin="10">
-            <DataGrid x:Name="MainDataGrid" HeadersVisibility="Column" SelectionMode="Single" AutoGenerateColumns="False" FontFamily="Avenir" ItemsSource="{Binding }">
+        <DockPanel LastChildFill="False"  Grid.Row="2">
+            <Menu
+                DockPanel.Dock="Left"
+                Foreground="#0C0C0C"
+                BorderBrush="#8FA6CC"
+                Background="#B4E4FD"
+                BorderThickness="0,1,0,1"
+                Margin="10"
+                Height="40"
+                Width="240"
+                FontFamily="Avenir"
+                FontSize="14"
+                Cursor="Hand">
+                <MenuItem
+                    x:Name="AddItem_B"
+                    Width="80"
+                    Height="40"
+                    Header="Добавить" Click="AddItem_B_Click"/>
+                <MenuItem
+                    x:Name="UpdateItem_B"
+                    Width="80"
+                    Height="40"
+                    Header="Изменить" Click="UpdateItem_B_Click"/>
+                <MenuItem
+                    x:Name="DeleteItem_B"
+                    Width="80"
+                    Height="40"
+                    Header="Удалить"
+                    Click="DeleteItem_B_Click"/>
+            </Menu>
+                
+        </DockPanel>
+        <DockPanel x:Name="DGDockPanel" DataContext="{StaticResource userViewSource}" LastChildFill="True" Grid.Row="3" Margin="10">
+            <DataGrid x:Name="MainDataGrid" HeadersVisibility="Column" SelectionMode="Single" AutoGenerateColumns="False" FontFamily="Avenir" IsReadOnly="True" ItemsSource="{Binding}">
             </DataGrid>
         </DockPanel>
     </Grid>

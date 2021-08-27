@@ -17,12 +17,12 @@ namespace CRM_Shop
             switch (tableName)
             {
                 case "User":
-                    BindingList.AddRange(new string[] { "Login", "UserRole.RoleName", "Employee.LastName"});
-                    HeaderList.AddRange(new string[] { "Логин", "Роль пользователя", "Сотрудник" });
+                    BindingList.AddRange(new string[] { "UserId", "Login", "UserRole.RoleName" });
+                    HeaderList.AddRange(new string[] { "ID", "Логин", "Роль пользователя" });
                     break;
                 case "Employee":
-                    BindingList.AddRange(new string[] { "LastName", "FirstName", "MiddleName", "Post.PostName" });
-                    HeaderList.AddRange(new string[] { "Фамилия", "Имя", "Отчество", "Должность" });
+                    BindingList.AddRange(new string[] { "EmployeeId", "LastName", "FirstName", "MiddleName", "Post.PostName", "User.Login"});
+                    HeaderList.AddRange(new string[] { "ID", "Фамилия", "Имя", "Отчество", "Должность", "Учетная запись" });
                     break;
                 default:
                     break;
@@ -37,6 +37,8 @@ namespace CRM_Shop
                 };
                 MainDataGrid.Columns.Add(column);
             }
+
+            MainDataGrid.Columns[0].Visibility = System.Windows.Visibility.Collapsed;
         }
     }
 }

@@ -8,11 +8,11 @@
         <EntityTypeShape EntityType="CRM_ShopModel.Employee" Width="1.5" PointX="3.375" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="CRM_ShopModel.Post" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CRM_ShopModel.UserRole" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="CRM_ShopModel.User" Width="1.5" PointX="5.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CRM_ShopModel.User" Width="1.5" PointX="6.375" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="CRM_ShopModel.FK_dbo_Employees_dbo_Posts_PostId" ManuallyRouted="false" >
         </AssociationConnector>
         <AssociationConnector Association="CRM_ShopModel.FK_dbo_Users_dbo_UserRoles_RoleId" ManuallyRouted="false" />
-        <AssociationConnector Association="CRM_ShopModel.FK_Users_Employees" />
+        <AssociationConnector Association="CRM_ShopModel.FK_Employees_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
